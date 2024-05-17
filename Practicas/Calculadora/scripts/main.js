@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const display = document.getElementById('display');
     const buttons = Array.from(document.getElementsByClassName('button'));
     let operator = null;
@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let shouldResetDisplay = false;
 
     buttons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const value = this.getAttribute('data-value');
-            
+
             if (value === 'C') {
                 clearDisplay();
             } else if (value === '=') {
