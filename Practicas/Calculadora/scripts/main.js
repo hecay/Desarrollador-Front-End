@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const buttons = Array.from(document.getElementsByClassName('button'));
     let operator = null;
     let operand1 = null;
-    let operand2 = null;
     let shouldResetDisplay = false;
 
     buttons.forEach(button => {
@@ -13,18 +12,22 @@ document.addEventListener("DOMContentLoaded", function () {
             if (value === 'C') {
                 clearDisplay();
             } else if (value === '=') {
-                if (operator && operand1 !== null) {
-                    operand2 = parseFloat(display.innerText);
-                    const result = calculate(operand1, operand2, operator);
-                    display.innerText = result;
-                    resetCalculator();
+                if (operator !== null && operand1 !== null) {
+                    const operand2 = parseFloat(display.innerText);
+                    if (!isNaN(operand2)) {
+                        const result = calculate(operand1, operand2, operator);
+                        display.innerText = result;
+                        resetCalculator();
+                    }
                 }
             } else if (['+', '-', '*', '/'].includes(value)) {
-                if (operator && operand1 !== null) {
-                    operand2 = parseFloat(display.innerText);
-                    const result = calculate(operand1, operand2, operator);
-                    display.innerText = result;
-                    operand1 = result;
+                if (operator !== null && operand1 !== null) {
+                    const operand2 = parseFloat(display.innerText);
+                    if (!isNaN(operand2)) {
+                        const result = calculate(operand1, operand2, operator);
+                        display.innerText = result;
+                        operand1 = result;
+                    }
                 } else {
                     operand1 = parseFloat(display.innerText);
                 }
@@ -49,14 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
         display.innerText = '0';
         operator = null;
         operand1 = null;
-        operand2 = null;
         shouldResetDisplay = false;
     }
 
     function resetCalculator() {
         operator = null;
         operand1 = null;
-        operand2 = null;
         shouldResetDisplay = true;
     }
 
